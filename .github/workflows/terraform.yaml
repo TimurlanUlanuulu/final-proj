@@ -110,6 +110,6 @@ jobs:
 
       - name: Terraform apply
         run: |
-          terraform destroy \
+          terraform apply \
             -auto-approve \
             -var-file=environments/${{ env.ENVIRONMENT }}/${{ env.ENVIRONMENT }}.tfvars
