@@ -147,17 +147,17 @@ resource "aws_autoscaling_group" "nodes" {
 
   dynamic "tag" {
     for_each = merge(
-        var.tags,
-        {
+      var.tags,
+      {
         Name                                        = "${var.name}-worker-node"
         "kubernetes.io/cluster/${var.cluster_name}" = "owned"
-        }
+      }
     )
 
     content {
-        key                 = tag.key
-        value               = tag.value
-        propagate_at_launch = true
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
     }
   }
 
