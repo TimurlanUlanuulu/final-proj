@@ -21,7 +21,7 @@ resource "aws_launch_template" "nodes" {
     http_endpoint               = "enabled"
     http_tokens                 = "required"
     http_put_response_hop_limit = 2
-    instance_metadata_tags      = "enabled"
+    instance_metadata_tags      = "disabled"
   }
 
   monitoring {
@@ -149,8 +149,7 @@ resource "aws_autoscaling_group" "nodes" {
     for_each = merge(
       var.tags,
       {
-        Name                                        = "${var.name}-worker-node"
-        "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+        Name = "${var.name}-worker-node"
       }
     )
 
