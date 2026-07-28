@@ -40,8 +40,7 @@ jobs:
   terraform-checks:
     name: Terraform Checks
     runs-on: ubuntu-latest
-    environment: ${{ env.ENVIRONMENT }}
-
+    environment: ${{ github.ref == 'refs/heads/main' && 'production' || github.ref == 'refs/heads/staging' && 'staging' || 'dev' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -85,7 +84,7 @@ jobs:
   terraform-apply:
     name: Terraform Apply
     runs-on: ubuntu-latest
-    environment: ${{ env.ENVIRONMENT }}
+    environment: ${{ github.ref == 'refs/heads/main' && 'production' || github.ref == 'refs/heads/staging' && 'staging' || 'dev' }}
     needs: terraform-checks
 
     if: |
