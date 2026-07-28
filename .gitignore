@@ -11,6 +11,9 @@
 *.tfvars
 *.tfvars.json
 
+# Allow environment tfvars (no secrets — secrets go in GitHub Actions vars/secrets)
+!environments/**/*.tfvars
+
 # Crash log files
 crash.log
 crash.*.log
