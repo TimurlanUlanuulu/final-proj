@@ -24,6 +24,21 @@ private_subnet_cidrs = [
 
 kubernetes_version = "1.35"
 
+cluster_endpoint_public_access  = true
+cluster_endpoint_private_access = true
+
+cluster_endpoint_public_access_cidrs = [
+  "0.0.0.0/0"
+]
+
+cluster_enabled_log_types = [
+  "api",
+  "audit",
+  "authenticator",
+  "controllerManager",
+  "scheduler"
+]
+
 github_application_role_arn = "arn:aws:iam::308082261316:role/GitHubActionsCICDrole"
 github_terraform_role_arn   = "arn:aws:iam::308082261316:role/GitHubActionsTerraformIAMrole"
-eks_administrator_role_arn  = "arn:aws:iam::123456789012:role/EKSAdministratorRole"
+eks_administrator_role_arn  = "arn:aws:iam::308082261316:role/EKSAdministratorRole"
