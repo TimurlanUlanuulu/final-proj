@@ -65,5 +65,5 @@ output "eks_node_autoscaling_group_name" {
 output "eks_node_ami_id" {
   description = "AMI used by the EKS worker nodes."
   value       = module.eks.node_ami_id
-  sensitive = true
+  sensitive   = true
 }
