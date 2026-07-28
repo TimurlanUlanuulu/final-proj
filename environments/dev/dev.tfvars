@@ -42,3 +42,20 @@ cluster_enabled_log_types = [
 github_application_role_arn = "arn:aws:iam::308082261316:role/GitHubActionsCICDrole"
 github_terraform_role_arn   = "arn:aws:iam::308082261316:role/GitHubActionsTerraformIAMrole"
 eks_administrator_role_arn  = "arn:aws:iam::308082261316:role/EKSAdministratorRole"
+
+
+node_instance_types = [
+  "t3.medium",
+  "t3a.medium",
+  "t2.medium"
+]
+
+node_min_size     = 1
+node_desired_size = 3
+node_max_size     = 5
+
+node_on_demand_percentage = 20
+
+node_root_volume_size = 30
+node_root_volume_type = "gp3"
+

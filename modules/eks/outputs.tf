@@ -43,3 +43,29 @@ output "cluster_certificate_authority_data" {
   value       = aws_eks_cluster.this.certificate_authority[0].data
   sensitive   = true
 }
+
+
+output "node_iam_role_arn" {
+  description = "ARN of the self-managed worker node IAM role."
+  value       = aws_iam_role.nodes.arn
+}
+
+output "node_instance_profile_arn" {
+  description = "ARN of the worker node instance profile."
+  value       = aws_iam_instance_profile.nodes.arn
+}
+
+output "node_launch_template_id" {
+  description = "ID of the worker node launch template."
+  value       = aws_launch_template.nodes.id
+}
+
+output "node_autoscaling_group_name" {
+  description = "Name of the self-managed worker node Auto Scaling Group."
+  value       = aws_autoscaling_group.nodes.name
+}
+
+output "node_ami_id" {
+  description = "AMI ID used by the self-managed worker nodes."
+  value       = local.node_ami_id
+}

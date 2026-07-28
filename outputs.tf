@@ -41,3 +41,28 @@ output "eks_worker_security_group_id" {
   description = "Security group assigned to self-managed worker nodes."
   value       = module.eks.worker_security_group_id
 }
+
+output "eks_node_iam_role_arn" {
+  description = "ARN of the EKS worker node IAM role."
+  value       = module.eks.node_iam_role_arn
+}
+
+output "eks_node_instance_profile_arn" {
+  description = "ARN of the EKS worker node instance profile."
+  value       = module.eks.node_instance_profile_arn
+}
+
+output "eks_node_launch_template_id" {
+  description = "ID of the worker node launch template."
+  value       = module.eks.node_launch_template_id
+}
+
+output "eks_node_autoscaling_group_name" {
+  description = "Name of the worker node Auto Scaling Group."
+  value       = module.eks.node_autoscaling_group_name
+}
+
+output "eks_node_ami_id" {
+  description = "AMI used by the EKS worker nodes."
+  value       = module.eks.node_ami_id
+}

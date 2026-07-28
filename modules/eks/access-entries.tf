@@ -49,3 +49,22 @@ resource "aws_eks_access_policy_association" "this" {
     aws_eks_access_entry.this
   ]
 }
+
+
+resource "aws_eks_access_entry" "nodes" {
+  cluster_name  = aws_eks_cluster.this.name
+  principal_arn = aws_iam_role.nodes.arn
+  type          = "EC2_LINUX"
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "${var.cluster_name}-self-managed-nodes"
+    }
+  )
+
+  depends_on = [
+    aws_iam_role_policy_attachment.nodes_eks_worker,
+    aws_iam_role_policy_attachment.nodes_ecr_pull
+  ]
+}

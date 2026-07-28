@@ -108,3 +108,64 @@ variable "github_terraform_role_arn" {
   description = "ARN of the IAM role to be used by the GitHub Terraform runner for EKS cluster management."
   type        = string
 }
+
+variable "node_instance_types" {
+  description = "EC2 instance types allowed for the self-managed worker group."
+  type        = list(string)
+
+  default = [
+    "t3.medium",
+    "t3a.medium",
+    "t2.medium"
+  ]
+
+  validation {
+    condition     = length(var.node_instance_types) >= 2
+    error_message = "At least two instance types must be provided for mixed capacity."
+  }
+}
+
+variable "node_min_size" {
+  description = "Minimum number of worker nodes."
+  type        = number
+  default     = 1
+}
+
+variable "node_desired_size" {
+  description = "Desired number of worker nodes."
+  type        = number
+  default     = 3
+}
+
+variable "node_max_size" {
+  description = "Maximum number of worker nodes."
+  type        = number
+  default     = 5
+}
+
+variable "node_on_demand_percentage" {
+  description = "Percentage of worker capacity fulfilled by On-Demand instances."
+  type        = number
+  default     = 20
+
+  validation {
+    condition = (
+      var.node_on_demand_percentage >= 0 &&
+      var.node_on_demand_percentage <= 100
+    )
+
+    error_message = "On-Demand percentage must be between 0 and 100."
+  }
+}
+
+variable "node_root_volume_size" {
+  description = "Root EBS volume size for worker nodes in GiB."
+  type        = number
+  default     = 30
+}
+
+variable "node_root_volume_type" {
+  description = "Root EBS volume type for worker nodes."
+  type        = string
+  default     = "gp3"
+}

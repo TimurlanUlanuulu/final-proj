@@ -97,3 +97,56 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+
+variable "node_instance_types" {
+  description = "Instance types available to the mixed instances worker group."
+  type        = list(string)
+
+  validation {
+    condition     = length(var.node_instance_types) >= 2
+    error_message = "At least two instance types must be provided."
+  }
+}
+
+variable "node_min_size" {
+  description = "Minimum number of worker nodes."
+  type        = number
+  default     = 1
+}
+
+variable "node_desired_size" {
+  description = "Desired number of worker nodes."
+  type        = number
+  default     = 3
+}
+
+variable "node_max_size" {
+  description = "Maximum number of worker nodes."
+  type        = number
+  default     = 5
+}
+
+variable "node_on_demand_percentage" {
+  description = "Percentage of capacity above the base fulfilled by On-Demand instances."
+  type        = number
+  default     = 20
+}
+
+variable "node_root_volume_size" {
+  description = "Root EBS volume size in GiB."
+  type        = number
+  default     = 30
+}
+
+variable "node_root_volume_type" {
+  description = "Root EBS volume type."
+  type        = string
+  default     = "gp3"
+}
+
+variable "node_ami_id" {
+  description = "Optional custom AMI ID for worker nodes. When null, the recommended EKS AL2023 AMI is used."
+  type        = string
+  default     = null
+}

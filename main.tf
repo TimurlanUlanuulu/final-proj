@@ -31,6 +31,17 @@ module "eks" {
 
   cluster_enabled_log_types = var.cluster_enabled_log_types
 
+  node_instance_types = var.node_instance_types
+
+  node_min_size     = var.node_min_size
+  node_desired_size = var.node_desired_size
+  node_max_size     = var.node_max_size
+
+  node_on_demand_percentage = var.node_on_demand_percentage
+
+  node_root_volume_size = var.node_root_volume_size
+  node_root_volume_type = var.node_root_volume_type
+
   access_entries = {
     eks_administrator = {
       principal_arn = var.eks_administrator_role_arn
@@ -65,4 +76,5 @@ module "eks" {
   }
 
   tags = local.common_tags
+
 }
