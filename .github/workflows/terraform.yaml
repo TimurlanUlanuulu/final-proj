@@ -66,7 +66,7 @@ jobs:
         run: terraform fmt -check -recursive
 
       - name: Terraform init
-        run: terraform init -backend-config=environments/${{ env.ENVIRONMENT }}/backend.hcl
+        run: terraform init -backend-config="bucket=final-project-terraform-state-08-27-2026-${ENVIRONMENT_STAGE}" -backend-config="key=${GITHUB_REF#refs/heads/}.tfstate"
 
       - name: Terraform validate
         run: terraform validate
@@ -113,7 +113,7 @@ jobs:
           terraform_version: ${{ env.TF_VERSION }}
 
       - name: Terraform init
-        run: terraform init -backend-config=environments/${{ env.ENVIRONMENT }}/backend.hcl
+        run: terraform init -backend-config="bucket=final-project-terraform-state-08-27-2026-${ENVIRONMENT_STAGE}" -backend-config="key=${GITHUB_REF#refs/heads/}.tfstate"
 
       - name: Terraform apply
         run: |
