@@ -147,21 +147,32 @@ resource "aws_autoscaling_group" "nodes" {
 
   dynamic "tag" {
     for_each = merge(
-      var.tags,
-      {
-        Name                                            = "${var.name}-worker-node"
-        "kubernetes.io/cluster/${var.cluster_name}"     = "owned"
-        "k8s.io/cluster-autoscaler/enabled"             = "true"
-        "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned"
-      }
+        var.tags,
+        {
+        Name                                        = "${var.name}-worker-node"
+        "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+        }
     )
 
     content {
-      key                 = tag.key
-      value               = tag.value
-      propagate_at_launch = true
+        key                 = tag.key
+        value               = tag.value
+        propagate_at_launch = true
     }
   }
+
+  tag {
+    key                 = "k8s.io/cluster-autoscaler/enabled"
+    value               = "true"
+    propagate_at_launch = false
+  }
+
+  tag {
+    key                 = "k8s.io/cluster-autoscaler/${var.cluster_name}"
+    value               = "owned"
+    propagate_at_launch = false
+  }
+
 
   depends_on = [
     aws_eks_access_entry.nodes,
