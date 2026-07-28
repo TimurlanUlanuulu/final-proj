@@ -41,11 +41,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Debug OIDC token                                                                                                                           
-        run: |                                                                                                                                             
-          curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
-          "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" \                                                                                   
-          | jq -R 'split(".") | .[1] | @base64d | fromjson | .sub'  
+      - name: Debug OIDC configuration
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Ref: $GITHUB_REF"
+          echo "Environment: ${{ env.ENVIRONMENT }}"
+          echo "IAM role: ${{ vars.IAM_ROLE }}"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
