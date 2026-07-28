@@ -21,13 +21,8 @@ terraform {
 
 provider "aws" {
   region = var.aws_region
-}
 
-terraform {
-  backend "s3" {
-    # bucket         = "project-x-state-bucket-staging"  
-    key            = "terraform.tfstate"
-    region         = "us-east-1"
-    dynamodb_table = "terraformlock"
+  default_tags {
+    tags = local.common_tags
   }
 }
